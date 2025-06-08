@@ -5,7 +5,7 @@ const { BlackboxAIClient } = require('@utiric/blackbox-ai');
 
 // Initialize Blackbox client with your cookie-based auth
 const client = new BlackboxAIClient({
-  session_token: process.env.BLACKBOX_COOKIE
+  validated: process.env.BLACKBOX_COOKIE
 });
 
 async function generateTailwindHTML(imagePath) {
