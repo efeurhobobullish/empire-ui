@@ -1,7 +1,7 @@
 require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
-const { AIClient } = require('blackboxapi');
+const { AIClient } = require('@utiric/blackbox-ai');
 
 // Initialize Blackbox client with your cookie-based auth
 const client = new AIClient({
