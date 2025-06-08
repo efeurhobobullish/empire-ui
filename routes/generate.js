@@ -1,17 +1,15 @@
 const express = require("express");
 const router = express.Router();
-const { generateTailwindHTML } = require("../services/openai");
+const { generateTailwindHTML } = require("../services/blackbox");
 
 router.post("/", async (req, res) => {
+  if (!req.file) return res.status(400).json({ error: "No image uploaded." });
   try {
-    const file = req.file;
-    if (!file) return res.status(400).json({ error: "No image uploaded." });
-
-    const htmlCode = await generateTailwindHTML(file.path);
-    res.json({ code: htmlCode });
+    const code = await generateTailwindHTML(req.file.path);
+    res.json({ code });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Failed to generate code." });
+    res.status(500).json({ error: "Blackbox API generation failed." });
   }
 });
 
