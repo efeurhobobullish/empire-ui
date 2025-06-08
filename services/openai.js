@@ -12,26 +12,26 @@ async function generateTailwindHTML(imagePath) {
   const imageBuffer = fs.readFileSync(imagePath);
 
   const response = await openai.chat.completions.create({
-    model: "gpt-4-vision-preview",
-    messages: [
-      {
-        role: "user",
-        content: [
-          {
-            type: "text",
-            text: "Generate clean HTML using Tailwind CSS from this UI image. Don't avoid JS. Use responsive Tailwind classes.",
+  model: "gpt-4o",
+  messages: [
+    {
+      role: "user",
+      content: [
+        {
+          type: "text",
+          text: "Generate clean HTML using Tailwind CSS from this UI image. Don't avoid JS. Use responsive Tailwind classes.",
+        },
+        {
+          type: "image_url",
+          image_url: {
+            url: `data:image/png;base64,${imageBuffer.toString("base64")}`,
           },
-          {
-            type: "image_url",
-            image_url: {
-              url: `data:image/png;base64,${imageBuffer.toString("base64")}`,
-            },
-          },
-        ],
-      },
-    ],
-    max_tokens: 2000,
-  });
+        },
+      ],
+    },
+  ],
+  max_tokens: 2000,
+});
 
   return response.choices[0].message.content;
 }
