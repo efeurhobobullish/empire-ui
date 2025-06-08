@@ -12,7 +12,7 @@ async function generateTailwindHTML(imagePath) {
   const imageBuffer = fs.readFileSync(imagePath);
 
   const response = await openai.chat.completions.create({
-  model: "gpt-4o",
+  model: "blackbox",
   messages: [
     {
       role: "user",
